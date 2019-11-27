@@ -1,0 +1,19 @@
+{
+  "name": "blue",
+  "version": "1.0.0",
+  "description": "The Blue Team",
+  "main": "main.js",
+  "scripts": {
+    "test": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ServerBlue/Blue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ServerBlue/Blue/issues"
+  },
+  "homepage": "https://github.com/ServerBlue/Blue#readme"
+}
