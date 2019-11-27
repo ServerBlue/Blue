@@ -8,4 +8,7 @@
 
 
 # Fixed web server
-`$ node `
+## 1- Run the server:
+`$ node FixedWebServer.js`
+## 2- Try to get contents of different files in the system (illegal file access):
+`curl http://127.0.0.1:8080/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
