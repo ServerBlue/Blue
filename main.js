@@ -2,16 +2,17 @@
 
 const http = require('http');
 const fs = require('fs');
-const DIR = process.cwd();
-const path = require('path');
-const HTTP_PORT = 8080;
-const HTTP_HOST = '127.0.0.1';
-const INDEX = 'index.html';
+
+const DIR = __dirname;
+const WWW = DIR + '/www/';
+const PORT = 8080;
+const HOST = '127.0.0.1';
+
 const server = http.createServer((req, res) => {
   let url = decodeURI(req.url);
-  if (url[url.length - 1] === '/') url += INDEX;
+  if (url === '/') url = 'index.html';
   console.log(url);
-  const fileName = path.join(DIR, 'static', url);
+  const fileName = WWW + url;
   fs.readFile(fileName, 'utf8', (err, data) => {
     if (err) {
       res.end('Error 404: File not found');
@@ -21,6 +22,6 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(HTTP_PORT);
+server.listen(PORT);
 
-console.log(`Server started at http://${HTTP_HOST}:${HTTP_PORT}/`);
+console.log(`Server started at http://${HOST}:${PORT}/`);
