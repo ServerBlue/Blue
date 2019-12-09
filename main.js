@@ -15,6 +15,7 @@ const HOST = '127.0.0.1';
 
 const routing = {
   '/listGroups': async request => {
+    // http://127.0.0.1:3000/listGroups
     const sql = 'SELECT * FROM Groups';
     try {
       const groups = db.query(sql);
@@ -22,10 +23,11 @@ const routing = {
       return groups;
     } catch (err) {
       console.error(err.message);
-      return err;
+      return err.message;
     }
   },
   '/signIn': async request => {
+    // http://127.0.0.1:3000/signIn?login=admin&password=admin
     const { login, password } = request;
     const sql = `SELECT * FROM Users where Name = '${login}'`;
     try {
@@ -34,24 +36,27 @@ const routing = {
       return user;
     } catch (err) {
       console.error(err.message);
-      return err;
+      return err.message;
     }
   },
 };
 
 const server = http.createServer((req, res) => {
-  let uri = decodeURI(req.url);
+  let uri = decodeURI(req.url); // %20 -> ' '
   if (uri === '/') uri = 'index.html';
   console.log(uri);
   for (let key in routing) {
     if (uri.startsWith(key)) {
       const handler = routing[key];
       const query = url.parse(uri).query || '';
-      console.log({ query });
+      const request = {};
       const parameters = query
         .split('&')
-        .map(item => item.split('='));
-      const request = Object.fromEntries(parameters);
+        .forEach(item => {
+          const [key, value] = item.split('=');
+          request[key] = value;
+        });
+      console.log({ request });
       handler(request).then(result => {
         res.end(JSON.stringify(result));
       });
