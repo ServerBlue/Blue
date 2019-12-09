@@ -11,9 +11,12 @@
     "url": "git+https://github.com/ServerBlue/Blue.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ServerBlue/Blue/issues"
   },
-  "homepage": "https://github.com/ServerBlue/Blue#readme"
+  "homepage": "https://github.com/ServerBlue/Blue#readme",
+  "dependencies": {
+    "pg": "^7.14.0"
+  }
 }
